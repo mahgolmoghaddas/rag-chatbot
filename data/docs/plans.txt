@@ -1,0 +1,20 @@
+# Pricing & Plans
+
+## Free Plan
+- Limited access to the knowledge base
+- Up to 20 queries per month
+- Community support only
+
+## Professional Plan
+- Unlimited document queries
+- Priority support
+- Monthly billing
+
+## Enterprise Plan
+- Custom pricing
+- Dedicated account manager
+- On-premise deployment options
+- SLA-backed support
+
+Enterprise pricing is determined based on usage volume,
+security requirements, and integration complexity.

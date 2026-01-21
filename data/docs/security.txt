@@ -1,0 +1,12 @@
+Security & Privacy
+
+All customer data is encrypted in transit using TLS 1.2 or higher.
+Sensitive information is never logged or stored in plain text.
+
+Uploaded documents are used exclusively for retrieval purposes and are not
+used to train machine learning models.
+
+Access to internal systems is restricted based on role-based access control (RBAC).
+Regular security audits are conducted to ensure compliance with internal policies.
+
+For security-related inquiries, customers should contact support directly.

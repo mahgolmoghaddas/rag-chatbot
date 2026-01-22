@@ -1,0 +1,21 @@
+/* app/globals.css */
+
+:root {
+    --cobalt-900: #0a1024;
+    --cobalt-800: #111936;
+    --cobalt-700: #1b2a5c;
+    --cobalt-600: #243b85;
+    --cobalt-500: #2f4fd8;
+  
+    --surface: #ffffff;
+    --surface-muted: #f5f7fb;
+  
+    --border: #e3e7f2;
+    --text-primary: #0b1220;
+    --text-secondary: #5b647a;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+  }

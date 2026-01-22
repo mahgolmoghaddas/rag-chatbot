@@ -14,9 +14,10 @@ export async function POST(req: Request) {
   // 1) Retrieve
   const hits = await retrieve(q, 5);
 
+
   // 2) Threshold: if top score too low, treat as "not found"
   const topScore = hits[0]?.score ?? 0;
-  const THRESHOLD = 0.78; // tune this
+  const THRESHOLD = 0; // tune this
 
   if (topScore < THRESHOLD) {
     return Response.json({
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
       { role: "user", content: `Question: ${q}\n\nINTERNAL CONTEXT:\n${context}` },
     ],
   });
+ 
 
   return Response.json({
     answer: response.output_text,
@@ -56,4 +58,7 @@ export async function POST(req: Request) {
       score: h.score,
     })),
   });
+
+  
+
 }

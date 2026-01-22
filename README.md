@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Internal Knowledge Base RAG Chatbot (Next.js + OpenAI)
 
-## Getting Started
+A Retrieval-Augmented Generation (RAG) chatbot built with **Next.js App Router** and **OpenAI**, designed to answer user questions **only from internal documents**.  
+If the system cannot confidently find an answer in the knowledge base, it gracefully falls back to **human customer support**.
 
-First, run the development server:
+This project demonstrates how to build a **production-style AI assistant** with grounding, retrieval, and safety controls.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 📄 **Document ingestion & chunking**
+- 🧠 **Vector embeddings + semantic retrieval (RAG)**
+- 🤖 **LLM answers grounded strictly in internal docs**
+- 🚫 **Hallucination guard** with similarity threshold
+- 🧑‍💼 **Human handoff fallback** when answer is not found
+- 🔐 **Secure server-side OpenAI API usage**
+- ⚡ **Next.js App Router (API routes + UI)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧱 Architecture Overview
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+┌────────────┐
+│ User │
+│ (Browser) │
+└─────┬──────┘
+│ Question
+▼
+┌──────────────────────────┐
+│ Next.js UI (page.tsx) │
+│ - Chat interface │
+│ - Input / loading state │
+└─────┬────────────────────┘
+│ POST /api/chat
+▼
+┌──────────────────────────┐
+│ Next.js API Route │
+│ app/api/chat/route.ts │
+│ │
+│ 1. Embed user question │
+│ 2. Retrieve top-K docs │
+│ 3. Similarity threshold │
+└─────┬───────────┬────────┘
+│ │
+│ │ (low confidence)
+│ ▼
+│ ┌──────────────────────┐
+│ │ Human Handoff │
+│ │ "Contact support" │
+│ └──────────────────────┘
+│
+│ (high confidence)
+▼
+┌──────────────────────────┐
+│ OpenAI LLM Generation │
+│ - Context-grounded prompt│
+│ - Answer only from docs │
+└─────┬────────────────────┘
+│
+▼
+┌──────────────────────────┐
+│ Response to UI │
+│ - Answer text │
+│ - (Optional) sources │
+└──────────────────────────┘

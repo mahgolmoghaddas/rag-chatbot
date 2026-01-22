@@ -1,0 +1,16 @@
+Refund Policy
+
+We offer a 14-day refund window for all standard subscription plans.
+Customers may request a refund within 14 days of the initial purchase date,
+provided that the service has not been abused or used in violation of our terms.
+
+Refunds are not available for:
+- Enterprise contracts
+- Custom integrations
+- Services that have already been fully delivered
+
+Refund requests must be submitted through customer support and may take
+5–10 business days to process once approved.
+
+If a subscription is canceled after the refund window, access will remain
+active until the end of the current billing cycle.

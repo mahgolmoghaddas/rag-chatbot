@@ -20,47 +20,19 @@ This project demonstrates how to build a **production-style AI assistant** with 
 ---
 
 ## 🧱 Architecture Overview
+This project implements a production-style RAG pipeline:
 
-┌────────────┐
-│ User │
-│ (Browser) │
-└─────┬──────┘
-│ Question
-▼
-┌──────────────────────────┐
-│ Next.js UI (page.tsx) │
-│ - Chat interface │
-│ - Input / loading state │
-└─────┬────────────────────┘
-│ POST /api/chat
-▼
-┌──────────────────────────┐
-│ Next.js API Route │
-│ app/api/chat/route.ts │
-│ │
-│ 1. Embed user question │
-│ 2. Retrieve top-K docs │
-│ 3. Similarity threshold │
-└─────┬───────────┬────────┘
-│ │
-│ │ (low confidence)
-│ ▼
-│ ┌──────────────────────┐
-│ │ Human Handoff │
-│ │ "Contact support" │
-│ └──────────────────────┘
-│
-│ (high confidence)
-▼
-┌──────────────────────────┐
-│ OpenAI LLM Generation │
-│ - Context-grounded prompt│
-│ - Answer only from docs │
-└─────┬────────────────────┘
-│
-▼
-┌──────────────────────────┐
-│ Response to UI │
-│ - Answer text │
-│ - (Optional) sources │
-└──────────────────────────┘
+CMS (Contentful) → offline ingestion & embedding
+
+Vector similarity search (top-K cosine similarity)
+
+Confidence-based gating before LLM invocation
+
+Context-restricted generation (no external knowledge)
+
+Fallback to human support when confidence is insufficient
+
+The system prioritizes correctness over coverage, explicitly avoiding hallucinated responses.
+
+Built with Next.js (API routes + UI), OpenAI embeddings, and a modular retrieval layer designed to be easily swapped for a managed vector DB.│ - Context-grounded prompt│
+
